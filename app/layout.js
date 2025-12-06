@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
               <nav className="flex items-center gap-4 text-sm">
                 <a href="/products" className="hover:underline">Menu</a>
                 <a href="/cart" className="hover:underline">Cart</a>
+                <a href="/owner" className="hover:underline">Owner</a>
               </nav>
             </div>
           </header>
