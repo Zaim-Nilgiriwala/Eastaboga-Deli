@@ -1,5 +1,6 @@
 // app/owner/page.jsx
 import prisma from '@/lib/prisma';
+import AddMenuItemForm from './AddMenuItemForm';
 
 export const dynamic = 'force-dynamic'; // always show fresh data
 
@@ -101,9 +102,18 @@ export default async function OwnerPage() {
 
         {/* Menu Items */}
         <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold">Menu Items</h2>
-            {/* Later: add "Add Item" button here */}
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h2 className="text-xl font-semibold">Menu Items</h2>
+              <p className="text-xs text-slate-400">
+                Manage what appears on the customer menu.
+              </p>
+            </div>
+
+            {/* Add Item form on the right */}
+            <div className="w-full max-w-sm">
+              <AddMenuItemForm />
+            </div>
           </div>
 
           {menuItems.length === 0 ? (
@@ -112,6 +122,7 @@ export default async function OwnerPage() {
             </p>
           ) : (
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {/* existing cards unchanged */}
               {menuItems.map((item) => (
                 <div
                   key={item.id}
@@ -120,9 +131,7 @@ export default async function OwnerPage() {
                   <div className="flex items-start justify-between gap-3">
                     <div className="space-y-1">
                       <h3 className="text-sm font-semibold">{item.name}</h3>
-                      <p className="text-xs text-slate-400">
-                        {item.category}
-                      </p>
+                      <p className="text-xs text-slate-400">{item.category}</p>
                     </div>
                     <div className="text-right">
                       <div className="text-sm font-bold">
@@ -133,7 +142,6 @@ export default async function OwnerPage() {
 
                   {item.image && (
                     <div className="mt-3 overflow-hidden rounded-xl border border-slate-800">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={item.image}
                         alt={item.name}
@@ -141,13 +149,12 @@ export default async function OwnerPage() {
                       />
                     </div>
                   )}
-
-                  {/* Later: Add Edit/Delete buttons here */}
                 </div>
               ))}
             </div>
           )}
         </section>
+
       </div>
     </main>
   );
